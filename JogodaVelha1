@@ -1,0 +1,220 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Jogo_Da_Velha1
+{
+    class TicTacToe
+    {
+        
+
+        static void Main(string[] args)
+        {
+
+            string[,] tabuleiro = new string [3,3] {{" ", " ", " " },{" ", " ", " "},{" ", " ", " "} };
+            Console.WriteLine("Bem vindo ao jogo da velha");
+
+            //Exibição inicial do tabuleiro
+            ExibirTabuleiro(tabuleiro);
+
+            int controle = 0;
+            
+            while ( controle < 9 || JogadorOGanhor.TesteGanhador == false || JogadorXGanhou == false){
+
+            //Pedir jogada jogador X
+            Console.WriteLine(controle);
+            Console.WriteLine("É a vez do jogador X. Selecione uma posição para jogar.");
+            Console.WriteLine("Digite a posição da linha desejada (De 0 até 2): ");
+            int linhaJogadorX = Convert.ToInt32(Console.ReadLine());
+                //Controlador de linha valida X
+                if(linhaJogadorX > 2)
+                {
+                    Console.WriteLine("Posição Inválida!!! Digite uma posição enre 0 e 2.");
+                    continue;
+                }
+
+            Console.WriteLine("Digite a posição da coluna desejada (De 0 até 2): ");
+            int colunaJogadorX = Convert.ToInt32(Console.ReadLine());
+                //Controlador de coluna valida X
+                if (colunaJogadorX > 2)
+                {
+                    Console.WriteLine("Posição Inválida!!! Digite uma posição enre 0 e 2.");
+                    continue;
+                }
+
+                //Inclusão do valor X na matriz
+                
+                if (tabuleiro[linhaJogadorX,colunaJogadorX] == " ") { 
+                tabuleiro [linhaJogadorX,colunaJogadorX] = "X" ;
+                controle++;
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.WriteLine("Posição ja marcada!!! Escolha uma posição livre.");
+                    continue;
+
+                }
+
+
+            //Impressao do tabuleiro com a jogada
+            ExibirTabuleiro(tabuleiro);
+            TesteGanhador(tabuleiro);
+
+
+                //break da repetição
+                if (controle == 9)
+            {
+                break;
+            }
+
+                //Pedir jogada jogador O
+
+                Boolean testeO = true;
+                int linhaJogadorO;
+                int colunaJogadorO;
+
+                while ( testeO == true) {    
+            Console.WriteLine(controle);
+            Console.WriteLine("É a vez do jogador O. Selecione uma posição para jogar.");
+            Console.WriteLine("Digite a posição da linha desejada (De 0 até 2): ");
+            linhaJogadorO = Convert.ToInt32(Console.ReadLine());
+
+                //Controlador de linha valida O
+                if (linhaJogadorO > 2)
+                {
+                    Console.WriteLine("Posição Inválida!!! Digite uma posição enre 0 e 2.");
+                    continue;
+                }
+
+                Console.WriteLine("Digite a posição da coluna desejada (De 0 até 2): ");
+            colunaJogadorO = Convert.ToInt32(Console.ReadLine());
+                //Controlador de Coluna valida O
+                if (colunaJogadorO > 2)
+                {
+                    Console.WriteLine("Posição Inválida!!! Digite uma posição enre 0 e 2.");
+                    continue;
+                    }
+                   
+                
+
+                //Inclusão do valor O na matriz
+                if (tabuleiro[linhaJogadorO, colunaJogadorO] == " ")
+                {
+                    tabuleiro[linhaJogadorO, colunaJogadorO] = "O";
+                    controle++;
+                    testeO = false;
+
+                        
+                        Console.Clear();
+
+                    }
+                    else
+                {
+                    Console.WriteLine("Posição ja marcada!!! Escolha uma posição livre.");
+                    continue;
+                }
+                }
+
+                //Impressao do tabuleiro com a jogada
+                ExibirTabuleiro(tabuleiro);
+                TesteGanhador(tabuleiro);
+            }
+            Console.WriteLine("O jogo acabou!!!");
+            Console.WriteLine("Digite qualquer tecla para finalizar...");
+
+            Console.ReadKey();
+
+
+
+
+
+
+
+
+            
+        }
+
+        //int linhaJogadorX;
+
+        
+
+        static void TesteGanhador(string[,] tabuleiro)
+        {
+
+            Boolean JogadorOGanhou = false;
+            Boolean JogadorXGanhou = false;
+
+            if (tabuleiro[0,0] == "X" && tabuleiro[0,1] == "X" && tabuleiro[0,2] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;               
+            } else if (tabuleiro[1, 0] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[1, 2] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[2, 0] == "X" && tabuleiro[2, 1] == "X" && tabuleiro[2, 2] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[0, 0] == "X" && tabuleiro[1, 0] == "X" && tabuleiro[2, 0] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[0, 1] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[2, 1] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[0, 2] == "X" && tabuleiro[1, 2] == "X" && tabuleiro[2, 2] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[0, 0] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[2, 2] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } else if (tabuleiro[0, 2] == "X" && tabuleiro[1, 1] == "X" && tabuleiro[2, 0] == "X"){
+                Console.WriteLine("JOGADOR X GANHOU!!!!");
+                JogadorXGanhou = true;
+            } 
+            //Teste Jogador O Ganhou
+            else if (tabuleiro[0, 0] == "O" && tabuleiro[0, 1] == "O" && tabuleiro[0, 2] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[1, 0] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[1, 2] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[2, 0] == "O" && tabuleiro[2, 1] == "O" && tabuleiro[2, 2] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[0, 0] == "O" && tabuleiro[1, 0] == "O" && tabuleiro[2, 0] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[0, 1] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[2, 1] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[0, 2] == "O" && tabuleiro[1, 2] == "O" && tabuleiro[2, 2] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[0, 0] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[2, 2] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            }else if (tabuleiro[0, 2] == "O" && tabuleiro[1, 1] == "O" && tabuleiro[2, 0] == "O"){
+                Console.WriteLine("JOGADOR O GANHOU!!!!");
+                JogadorOGanhou = true;
+            } 
+                
+        }
+
+        static void LinhaJogadorX()
+        {
+
+        }
+
+        static void ExibirTabuleiro(string[,] tabuleiro)
+        {
+            Console.WriteLine($"{tabuleiro[0, 0]} | {tabuleiro[0, 1]} | {tabuleiro[0, 2]}");
+            Console.WriteLine("---------");
+            Console.WriteLine($"{tabuleiro[1, 0]} | {tabuleiro[1, 1]} | {tabuleiro[1, 2]}");
+            Console.WriteLine("---------");
+            Console.WriteLine($"{tabuleiro[2, 0]} | {tabuleiro[2, 1]} | {tabuleiro[2, 2]}");
+
+        }
+
+    }
+}
