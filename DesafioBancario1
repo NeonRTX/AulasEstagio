@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DesafioBancario
+{
+    class banco
+    {
+        static Dictionary<string, int> clientes;
+
+        static void Main(string[] args)
+        {
+            clientes = new Dictionary<string, int>();
+            //clientes.Add("Nome");
+            //clientes.Add("Contas");
+            //clientes.Add("CPF");
+
+
+            while (true)
+            {
+
+                string opcao;
+            Console.WriteLine("---DIGITE A OPÇÃO DESEJADA---");
+            Console.WriteLine("1 - Criar Cliente");
+            Console.WriteLine("2 - Abrir/Criar Conta Bancária");
+            Console.WriteLine("3 - Fazer Depósito Bancário");
+            Console.WriteLine("4 - Fazer Saque");
+            Console.WriteLine("5 - Transferência Bancária");
+            Console.WriteLine("6 - Consultar Saldo");
+            Console.WriteLine("7 - Listar Clientes");
+            opcao = Console.ReadLine();
+
+
+            
+                switch (opcao) { 
+                case "1":{
+                        Console.WriteLine("Digite o nome do cliente: ");
+                        string cliente = Console.ReadLine();                      
+                        Console.WriteLine("Digite a conta do cliente: ");
+                        int conta = Convert.ToInt32(Console.ReadLine());
+                        clientes.Add(cliente, conta);
+                            Console.WriteLine(clientes);
+                        break;
+             }
+                case "2":
+                    {
+                        Console.WriteLine("222");
+                        break;
+                    }
+                case "3":
+                    {
+                        Console.WriteLine("333");
+                        break;
+                    }
+                case "4":
+                    {
+                        Console.WriteLine("444");
+                        break;
+                    }
+                case "5":
+                    {
+                        Console.WriteLine("555");
+                        break;
+                    }
+                case "6":
+                    {
+                        Console.WriteLine("666");
+                        break;
+                    }
+                case "7":
+                    {
+                        Console.WriteLine("--CLIENTES-- ");                            
+
+
+                        Console.WriteLine(banco.clientes.Keys);
+                    
+                        
+                        
+                        break;
+                    }
+            }
+            
+            
+            
+            Console.ReadKey();      
+            }
+            
+
+                    
+               
+            
+
+
+
+
+        }
+    }
+}
