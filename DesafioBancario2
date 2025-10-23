@@ -1,0 +1,154 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DesafioBancario2
+{
+    class banco
+    {
+        
+
+        static void Main(string[] args)
+        {
+
+            string cliente1 = "teste";
+            string cliente2 = "teste";
+            int CPF1 = 0000;
+            int CPF2 = 0000;
+            int conta1 = 0000;
+            int conta2 = 0000;
+            float saldo1 = 0;
+            float saldo2 = 0;
+            float deposito = 0;
+            float saque = 0;
+            float transferencia1 = 0;
+            float transferencia2 = 0;
+            Dictionary<string, int> clientes = new Dictionary<string, int>();
+
+            //estrutura de repetição menu
+            while (true)
+            {
+                //classe impressao menu
+                ImprimirMenu();
+
+                //opcao para sair do menu
+                string opcao = Console.ReadLine().ToUpper();
+                
+                if (opcao == "S")
+                    break;
+                
+                //Switch com opções do menu
+                switch (opcao)
+                {
+                    case "1":
+                        {
+                            //Console.WriteLine("Digite o nome do cliente 1: ");
+                            //cliente1 = Console.ReadLine();
+                            //Console.WriteLine("Digite o CPF do cliente 1: ");
+                            //CPF1 = Convert.ToInt32(Console.ReadLine());
+
+                            //Console.WriteLine("Digite o nome do cliente 2: ");
+                            //cliente2 = Console.ReadLine();
+                            //Console.WriteLine("Digite o CPF do cliente 2: ");
+                            //CPF2 = Convert.ToInt32(Console.ReadLine());
+
+                            
+                            Console.WriteLine("Digite o nome do cliente: ");
+                            cliente1 = Console.ReadLine();
+                            Console.WriteLine("Digite o CPF do cliente: ");
+                            CPF1 = Convert.ToInt32(Console.ReadLine());
+                            clientes.Add(cliente1, CPF1);
+
+                            break;
+                        }
+                    case "2":
+                        {
+                            Console.WriteLine("Digite o numero da conta bancária 1: ");
+                            conta1 = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Digite o saldo da conta bancária 1: ");
+                            saldo1 = Convert.ToInt32(Console.ReadLine());
+
+                            Console.WriteLine("Digite o numero da conta bancária 2: ");
+                            conta2 = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("Digite o saldo da conta bancária 2: ");
+                            saldo2 = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        }
+                    case "3":
+                        {
+                            Console.WriteLine("Digite o valor para depositar na conta 1: ");
+                            deposito = Convert.ToInt32(Console.ReadLine());
+                            saldo1 = saldo1 + deposito;
+                            Console.WriteLine("Digite o valor para depositar na conta 2: ");
+                            deposito = Convert.ToInt32(Console.ReadLine());
+                            saldo2 = saldo2 + deposito;
+                            break;
+                        }
+                    case "4":
+                        {
+                            Console.WriteLine("Digite o valor para sacar da conta 1: ");
+                            saque = Convert.ToInt32(Console.ReadLine());
+                            saldo1 = saldo1 - saque;
+                            Console.WriteLine("Digite o valor para depositar na conta 2: ");
+                            saque = Convert.ToInt32(Console.ReadLine());
+                            saldo2 = saldo2 - saque;
+                            break;
+                        }
+                    case "5":
+                        {
+                            Console.WriteLine("Digite o valor que deseja transferir para a conta 2: ");
+                            transferencia1 = Convert.ToInt32(Console.ReadLine());
+                            saldo1 = saldo1 - transferencia1;
+                            saldo2 = saldo2 + transferencia1;
+                            Console.WriteLine("Digite o valor que deseja transferir para a conta 1: ");
+                            transferencia2 = Convert.ToInt32(Console.ReadLine());
+                            saldo2 = saldo2 - transferencia2;
+                            saldo1 = saldo1 + transferencia2;
+                            break;
+                        }
+                    case "6":
+                        {
+                            Console.WriteLine("O saldo da sua conta 1 é: ");
+                            Console.WriteLine(saldo1);
+                            Console.WriteLine("O saldo da sua conta 2 é: ");
+                            Console.WriteLine(saldo2);
+                            break;
+                        }
+                    case "7":
+                        {
+                            Console.WriteLine("Digite o nome do cliente");
+                            string nome3 = Console.ReadLine();
+                            Console.WriteLine(clientes);
+                            
+                            //Console.WriteLine($"Cliente: {cliente1}");                            
+                            //Console.WriteLine($"Conta: {CPF1}");
+
+                            //Console.WriteLine($"Cliente: {cliente2}");
+                            //Console.WriteLine($"Conta: {CPF2}");
+
+                            break;
+                        }
+                }
+                
+            }
+            
+            
+
+        }
+
+        static void ImprimirMenu()
+        {
+            Console.WriteLine("---DIGITE A OPÇÃO DESEJADA---");
+            Console.WriteLine("1 - Criar Cliente");
+            Console.WriteLine("2 - Abrir/Criar Conta Bancária");
+            Console.WriteLine("3 - Fazer Depósito Bancário");
+            Console.WriteLine("4 - Fazer Saque");
+            Console.WriteLine("5 - Transferência Bancária");
+            Console.WriteLine("6 - Consultar Saldo");
+            Console.WriteLine("7 - Listar Clientes");
+            Console.WriteLine("S - Sair");
+        }
+    }
+}
