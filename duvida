@@ -6,31 +6,16 @@ using System.Threading.Tasks;
 
 namespace DesafioBancario2
 {
-    class banco
+    class financeiro
     {
         
 
         static void Main(string[] args)
         {
-
-            
-            string cliente2 = "teste";
-            
-            int CPF2 = 0000;
-            
-            int conta2 = 0000;
-            float saldo1 = 0;
-            float saldo2 = 0;
-            float deposito = 0;
-            float saque = 0;
-            float transferencia1 = 0;
-            float transferencia2 = 0;
-            Dictionary<string, int> clientes = new Dictionary<string, int>();
-
             //estrutura de repetição menu
             while (true)
             {
-                //classe impressao menu
+                //Método para imprimir o menu
                 ImprimirMenu();
 
                 //opcao para sair do menu
@@ -44,30 +29,20 @@ namespace DesafioBancario2
                 {
                     case "1":
                         {                           
-                            Cliente.CadastrarClientes();                                                       
+                            Cliente.CadastrarClientes();
+                            Console.Clear();
                             break;
                         }
                     case "2":
                         {
-                            //Console.WriteLine("Digite o numero da conta bancária 1: ");
-                            //int conta1 = Convert.ToInt32(Console.ReadLine());
-                            //Console.WriteLine("Digite o saldo da conta bancária 1: ");
-                            //saldo1 = Convert.ToInt32(Console.ReadLine());
-
-                            //Console.WriteLine("Digite o numero da conta bancária 2: ");
-                            //conta2 = Convert.ToInt32(Console.ReadLine());
-                            //Console.WriteLine("Digite o saldo da conta bancária 2: ");
-                            //saldo2 = Convert.ToInt32(Console.ReadLine());
+                            Cliente.CriarConta();                            
+                            Console.Clear();
                             break;
                         }
                     case "3":
-                        {
-                            //Console.WriteLine("Digite o valor para depositar na conta 1: ");
-                            //deposito = Convert.ToInt32(Console.ReadLine());
-                            //saldo1 = saldo1 + deposito;
-                            //Console.WriteLine("Digite o valor para depositar na conta 2: ");
-                            //deposito = Convert.ToInt32(Console.ReadLine());
-                            //saldo2 = saldo2 + deposito;
+                        {                           
+                            ContaBancaria.DepositarSaldo();
+                            Console.Clear();
                             break;
                         }
                     case "4":
@@ -78,6 +53,9 @@ namespace DesafioBancario2
                             //Console.WriteLine("Digite o valor para depositar na conta 2: ");
                             //saque = Convert.ToInt32(Console.ReadLine());
                             //saldo2 = saldo2 - saque;
+                            ContaBancaria.SacarSaldo();
+                            
+                            Console.Clear();
                             break;
                         }
                     case "5":
@@ -90,19 +68,23 @@ namespace DesafioBancario2
                             //transferencia2 = Convert.ToInt32(Console.ReadLine());
                             //saldo2 = saldo2 - transferencia2;
                             //saldo1 = saldo1 + transferencia2;
+                            Console.Clear();
                             break;
                         }
                     case "6":
-                        {
-                            //Console.WriteLine("O saldo da sua conta 1 é: ");
-                            //Console.WriteLine(saldo1);
-                            //Console.WriteLine("O saldo da sua conta 2 é: ");
-                            //Console.WriteLine(saldo2);
+                        {                            
+                            Cliente.ImprimirSaldoClientes();
+                            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
                     case "7":
                         {
-                            Cliente.ImprimirInfosClientes();                           
+                            Cliente.ImprimirInfosClientes();
+                            Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                            Console.ReadKey();
+                            Console.Clear();
                             break;
                         }
                 }
@@ -126,10 +108,18 @@ namespace DesafioBancario2
             Console.WriteLine("S - Sair");
         }
     }
+
+    class banco
+    {
+       
+        
+
+    }
+
     class Cliente
     {
-        public static Dictionary<string, string> nomes;
-        public static Dictionary<string, int> contas;
+        public static Dictionary<string, string> nomes = new Dictionary<string, string>();
+        public static Dictionary<string, int> contas = new Dictionary<string, int>();
 
         public static void CadastrarClientes()
         {
@@ -143,19 +133,98 @@ namespace DesafioBancario2
         public static void ImprimirInfosClientes()
         {
             List<string> listaDeCPFs = new List<string>(nomes.Keys);
+            if (listaDeCPFs.Count == 0)
+            {
+                Console.WriteLine("Não existe nenhum cliente cadastrado!");
+                return;
+            }
+            
             List<string> listaDeNomes = new List<string>(nomes.Values);
-            for(int indice = 0; indice < listaDeCPFs.Count; indice++)
+            List<int> listaDeContas = new List<int>(contas.Values);
+
+            for (int indice = 0; indice < listaDeCPFs.Count; indice++)
             {
                 string nome = listaDeNomes[indice];
                 string cpf = listaDeCPFs[indice];
-      
-                Console.WriteLine($"CPF do cliente {nome} é: {cpf}");
-            }
-            if(listaDeCPFs.Count == 0)
-            {
-                Console.WriteLine("Não existe nenhum cliente cadastrado!");
-            }
 
+                Console.WriteLine($"Cliente: {nome}");
+                Console.WriteLine($"CPF: {cpf}");
+
+                if (contas.ContainsKey(cpf))
+                {
+                    int conta = contas[cpf];
+                    Console.WriteLine($"Conta: {conta}");
+                    Console.WriteLine(" ");
+                }
+                else
+                {
+                    Console.WriteLine("esse cliente não possui nenhuma conta");
+                }
+            }
+            
         }
+
+        public static void ImprimirSaldoClientes()
+        {            
+                    Console.WriteLine("Digite uma conta: ");
+                    int conta = Convert.ToInt32(Console.ReadLine());
+                    if (ContaBancaria.saldo.ContainsKey(conta))
+                    {
+                        float saldo = ContaBancaria.saldo[conta];
+                        Console.WriteLine($"Conta: {conta}");
+                        Console.WriteLine($"Saldo: {saldo}");
+                    } else
+                    {
+                        Console.WriteLine("conta nao existe");
+                    }                   
+               
+        }
+
+        public static void CriarConta()
+        {
+           
+
+            Console.WriteLine("Digite o CPF do cliente: ");
+            string CPF = Console.ReadLine();
+            Console.WriteLine("Digite a nova conta do cliente: ");
+            int Conta = Convert.ToInt32(Console.ReadLine());
+            Cliente.contas.Add(CPF, Conta);
+            ContaBancaria.saldo.Add(Conta, 0);
+        }
+    }
+
+    class ContaBancaria
+    {
+        public static Dictionary<int, float> deposito = new Dictionary<int, float>();
+        public static Dictionary<int, float> saldo = new Dictionary<int, float>();
+        public static Dictionary<int, float> saque = new Dictionary<int, float>();
+
+
+        public static void DepositarSaldo()
+        {
+            List<int> listaDeContas = new List<int>(saldo.Keys);
+            List<float> listaDesaldos = new List<float>(saldo.Values);
+
+            Console.WriteLine("Digite a conta do cliente: ");
+            int numeroConta = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Digite o valor do depósito: ");
+            float valorDeposito = Convert.ToInt32(Console.ReadLine());
+            ContaBancaria.saldo.Aggregate (numeroConta, valorDeposito);
+        }
+
+        public static void SacarSaldo()
+        {
+            Console.WriteLine("Digite a conta do cliente: ");
+            int numeroConta = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Digite o valor do saque: ");
+            int valorSaque = Convert.ToInt32(Console.ReadLine());
+
+            if(ContaBancaria.saldo.ContainsKey(valorSaque))
+            {
+                ContaBancaria.saldo.Add(numeroConta, -valorSaque);
+            }
+            //ContaBancaria.saldo.Add(numeroConta, valorDeposito);
+        }
+
     }
 }
