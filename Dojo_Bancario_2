@@ -1,0 +1,132 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Desafio_Dojo_2._1
+{
+    class App
+    {
+
+        static void Main()
+        {
+            Console.WriteLine("Iniciando o sistema bancário...");
+
+            // Menu de operações
+            while (true)
+            {
+                Console.WriteLine("\n1 - Cadastrar novo cliente");
+                Console.WriteLine("2 - Cadastrar conta para cliente");
+                Console.WriteLine("3 - Listar clientes");
+                Console.WriteLine("4 - Consultar saldo de conta");
+                Console.WriteLine("5 - Efetuar depósito");
+                Console.WriteLine("6 - Efetuar saque");
+                Console.WriteLine("7 - Efetuar transferência");
+                Console.WriteLine("S - Sair");
+                Console.Write("Selecione a ação: ");
+                string opcao = Console.ReadLine().ToUpper();
+
+                if (opcao == "S")
+                    break;
+
+                switch (opcao)
+                {
+                    case "1":
+                       
+                        break;
+                    case "2":
+
+                        break;
+                    case "3":
+
+                        break;
+                    case "4":
+
+                        break;
+                    case "5":
+
+                        break;
+                    case "6":
+
+                        break;
+                    case "7":
+
+                        break;
+                    default:
+                        Console.WriteLine("\nOpção inválida.");
+
+                        break;
+                }
+            }
+
+            Console.WriteLine("\nEncerrando o sistema bancário...");
+        }
+    }
+
+    class Conta
+    {
+        private string NumeroConta;
+        private decimal Saldo;
+        private string TipoConta;
+
+        public Conta(string numeroConta, decimal saldo, string tipoConta)
+        {
+            NumeroConta = numeroConta;
+            Saldo = saldo;
+            TipoConta = tipoConta;
+        }
+
+        public void Depositar(decimal valorDeposito)
+        {
+            Saldo += valorDeposito;
+        }
+
+        public void Sacar(decimal valorSaque)
+        {
+            Saldo -= valorSaque;
+        }
+
+    }
+
+    class Cliente
+    {
+        private string NomeCliente;
+        private string CPF;
+        private Conta Conta;
+
+        public Cliente (string nomeCliente, string cpf)
+        {
+            NomeCliente = nomeCliente;
+            CPF = cpf;
+        }
+
+        public void AdicionarConta(Conta conta)
+        {
+            Conta = conta;
+        }
+    }
+
+    class Banco
+    {
+        //Criando a lista
+        private List<Cliente> ListaClientes = new List<Cliente>();
+
+        //Metodo para criar cliente
+        public void CriarCliente(string nome, string cpf)
+        {
+            //criando cliente e atribuindo a variavel
+            Cliente cliente = new Cliente(nome, cpf);
+            //adicionando a variavel cliente a LISTA DE CLIENTES
+            ListaClientes.Add(cliente);
+        }
+
+        public void CriarContaCliente(string cpf)
+        {
+            for(int i = 0; i < ListaClientes.Count; i++)
+            {
+
+            }
+        }
+    }
+}
